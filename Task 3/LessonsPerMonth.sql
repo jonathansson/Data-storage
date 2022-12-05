@@ -1,3 +1,8 @@
+/*
+Counts all lessons for each months and adds one to the type of lesson that has been counted.
+Then lists how many lessons were taken for each month and how many of each type.
+*/
+
 SELECT EXTRACT(MONTH FROM lesson.date), EXTRACT(YEAR FROM lesson.date),
 SUM(CASE WHEN ensemble.lesson_id = lesson.lesson_id then 1 else 0 end) AS ensemble,
 SUM(CASE WHEN private_lesson.lesson_id = lesson.lesson_id then 1 else 0 end) AS private,
