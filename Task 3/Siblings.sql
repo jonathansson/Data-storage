@@ -1,8 +1,13 @@
 /*
-Counts amount of students with same family id and lists how many siblings are in each family.
+Counts number of students with x amount of siblings.
 
--1 in order for student not to count as their own sibling.
+-1 in siblings for student not to count as their own sibling.
 */
-SELECT s1.name, COUNT(s1.family_id) - 1 FROM student s1
-LEFT JOIN student s2 ON s1.family_id = s2.family_id
-GROUP BY s1.name, s1.family_id;
+SELECT siblings - 1 as siblings, SUM(siblings) as number
+FROM (
+    SELECT family_id, COUNT(family_id) as siblings
+    FROM student
+    GROUP BY family_id
+) number
+GROUP BY siblings
+ORDER BY siblings ASC;
